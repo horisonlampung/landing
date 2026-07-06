@@ -1,56 +1,107 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Redirecting...</title>
+<title>Horison Lampung</title>
 
 <script>
-window.onload = function() {
+window.onload = function(){
 
-    // coba buka app Instagram
-    setTimeout(function() {
-        window.location.href =
-        "instagram://user?username=horisonlampung";
+    // Coba buka aplikasi Instagram
+    setTimeout(function(){
+
+        var iframe = document.createElement("iframe");
+        iframe.style.display = "none";
+        iframe.src = "instagram://user?username=horisonlampung";
+
+        document.body.appendChild(iframe);
+
     },1000);
 
-    // fallback ke web Instagram
-    setTimeout(function() {
-        window.location.href =
-        "https://www.instagram.com/horisonlampung/";
+    // Jika aplikasi tidak terbuka,
+    // pindah ke Instagram versi web
+    setTimeout(function(){
+
+        window.location.replace(
+        "https://www.instagram.com/horisonlampung/"
+        );
+
     },3000);
 
 };
 </script>
 
 <style>
+
 body{
+margin:0;
+padding:0;
 font-family:Arial,sans-serif;
+background:#ffffff;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-margin:0;
-background:#fff;
 text-align:center;
-padding:20px;
 }
 
 .container{
-max-width:350px;
+width:90%;
+max-width:400px;
+padding:30px;
+}
+
+.logo{
+font-size:30px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.subtitle{
+font-size:16px;
+margin-bottom:30px;
+color:#666;
+}
+
+.loading{
+margin:20px auto;
+width:50px;
+height:50px;
+border:5px solid #ddd;
+border-top:5px solid #E1306C;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+0%{
+transform:rotate(0deg);
+}
+100%{
+transform:rotate(360deg);
+}
 }
 
 .button{
 display:inline-block;
-padding:14px 30px;
+padding:14px 28px;
 background:#E1306C;
 color:white;
 text-decoration:none;
 border-radius:10px;
+font-size:18px;
 margin-top:20px;
-font-weight:bold;
 }
+
+.small{
+margin-top:20px;
+font-size:13px;
+color:#888;
+}
+
 </style>
 
 </head>
@@ -59,9 +110,15 @@ font-weight:bold;
 
 <div class="container">
 
-<h2>Mengalihkan ke Instagram...</h2>
+<div class="logo">
+HORISON LAMPUNG
+</div>
 
-<p>Mohon tunggu beberapa detik</p>
+<div class="subtitle">
+Membuka Instagram...
+</div>
+
+<div class="loading"></div>
 
 <a class="button"
 href="https://www.instagram.com/horisonlampung/">
@@ -69,6 +126,11 @@ href="https://www.instagram.com/horisonlampung/">
 Buka Instagram
 
 </a>
+
+<div class="small">
+Jika Instagram tidak terbuka otomatis,
+silakan tekan tombol di atas
+</div>
 
 </div>
 
