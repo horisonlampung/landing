@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Horison Lampung</title>
 
 <script>
@@ -12,56 +11,61 @@ window.onload = function(){
 
 let ua = navigator.userAgent.toLowerCase();
 
-if(ua.includes("android")){
+let isAndroid = ua.includes("android");
+let isPixel = ua.includes("pixel");
+let isIphone = ua.includes("iphone") || ua.includes("ipad");
 
-    // Android / Pixel
-    setTimeout(function(){
+// Android selain Pixel
+if(isAndroid && !isPixel){
 
-        window.location.href =
-        "intent://instagram.com/_u/horisonlampung#Intent;package=com.instagram.android;scheme=https;end";
+setTimeout(function(){
 
-    },800);
+window.location.href=
+"intent://instagram.com/_u/horisonlampung#Intent;package=com.instagram.android;scheme=https;end";
 
-}
-else{
-
-    // iPhone
-    setTimeout(function(){
-
-        window.location.href =
-        "instagram://user?username=horisonlampung";
-
-    },800);
+},1000);
 
 }
 
-// fallback ke web Instagram
+// iPhone
+else if(isIphone){
+
+setTimeout(function(){
+
+window.location.href=
+"instagram://user?username=horisonlampung";
+
+},1000);
+
+}
+
+// fallback untuk semua
 setTimeout(function(){
 
 window.location.replace(
 "https://www.instagram.com/horisonlampung/"
 );
 
-},3000);
+},2500);
 
-};
+}
 
 </script>
 
 <style>
 
 body{
-font-family:Arial,sans-serif;
 margin:0;
+font-family:Arial,sans-serif;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-text-align:center;
 background:#fff;
+text-align:center;
 }
 
-.container{
+.box{
 padding:20px;
 max-width:350px;
 }
@@ -70,7 +74,7 @@ max-width:350px;
 display:inline-block;
 padding:14px 30px;
 background:#E1306C;
-color:#fff;
+color:white;
 text-decoration:none;
 border-radius:10px;
 margin-top:20px;
@@ -82,11 +86,11 @@ margin-top:20px;
 
 <body>
 
-<div class="container">
+<div class="box">
 
 <h2>Membuka Instagram...</h2>
 
-<p>Jika tidak otomatis, tekan tombol di bawah</p>
+<p>Jika tidak terbuka otomatis, tekan tombol di bawah</p>
 
 <a class="button"
 href="https://www.instagram.com/horisonlampung/">
