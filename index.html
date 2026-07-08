@@ -2,147 +2,153 @@
 <html lang="id">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Horison Lampung</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#ffffff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    text-align:center;
-}
+html,body{
 
-.container{
-    width:90%;
-    max-width:400px;
+margin:0;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial;
+background:#fff;
+
 }
 
 .loader{
-    width:60px;
-    height:60px;
-    border:6px solid #e5e5e5;
-    border-top:6px solid #E1306C;
-    border-radius:50%;
-    margin:25px auto;
-    animation:spin 1s linear infinite;
+
+width:60px;
+height:60px;
+
+border:6px solid #eee;
+border-top:6px solid #D81B60;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+
 }
 
 @keyframes spin{
-    from{transform:rotate(0deg);}
-    to{transform:rotate(360deg);}
+
+100%{
+
+transform:rotate(360deg);
+
 }
 
-h2{
-    margin-bottom:10px;
 }
 
-p{
-    color:#666;
-    line-height:1.6;
-}
-
-.button{
-    display:inline-block;
-    margin-top:30px;
-    padding:15px 35px;
-    background:#E1306C;
-    color:#fff;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
-}
 </style>
-
-<script>
-
-window.onload=function(){
-
-    const ua=navigator.userAgent.toLowerCase();
-
-    const isAndroid=ua.includes("android");
-    const isIphone=ua.includes("iphone") || ua.includes("ipad");
-    const isPixel=ua.includes("pixel");
-
-    // Pixel
-    if(isAndroid && isPixel){
-
-        setTimeout(function(){
-
-            window.location.href="https://www.instagram.com/horisonlampung/";
-
-        },800);
-
-    }
-
-    // Android selain Pixel
-    else if(isAndroid){
-
-        setTimeout(function(){
-
-            window.location.href="intent://instagram.com/_u/horisonlampung#Intent;package=com.instagram.android;scheme=https;end";
-
-        },600);
-
-    }
-
-    // iPhone
-    else if(isIphone){
-
-        setTimeout(function(){
-
-            window.location.href="instagram://user?username=horisonlampung";
-
-        },600);
-
-    }
-
-    // fallback semua device
-    setTimeout(function(){
-
-        window.location.href="https://www.instagram.com/horisonlampung/";
-
-    },1800);
-
-}
-
-</script>
 
 </head>
 
 <body>
 
-<div class="container">
-
-<h2>Membuka Instagram...</h2>
+<div align="center">
 
 <div class="loader"></div>
 
-<p>
-Mohon tunggu sebentar.<br>
-Jika Instagram tidak terbuka otomatis,
-silakan tekan tombol di bawah.
-</p>
-
-<a class="button"
-href="https://www.instagram.com/horisonlampung/">
-
-Buka Instagram
-
-</a>
+<p>Membuka Instagram...</p>
 
 </div>
+
+<script>
+
+const ua=navigator.userAgent.toLowerCase();
+
+const isAndroid=ua.includes("android");
+
+const isPixel=ua.includes("pixel");
+
+const isiPhone=/iphone|ipad|ipod/.test(ua);
+
+const igWeb="https://www.instagram.com/horisonlampung/";
+
+const igUniversal="https://www.instagram.com/_u/horisonlampung/";
+
+
+// PIXEL
+
+if(isPixel){
+
+window.location.replace(igWeb);
+
+}
+
+
+// DESKTOP
+
+else if(
+ua.includes("windows")
+||
+ua.includes("macintosh")
+){
+
+window.location.replace(igWeb);
+
+}
+
+
+// ANDROID
+
+else if(isAndroid){
+
+setTimeout(function(){
+
+window.location.href=
+"intent://instagram.com/_u/horisonlampung#Intent;package=com.instagram.android;scheme=https;end";
+
+},300);
+
+setTimeout(function(){
+
+window.location.replace(igWeb);
+
+},1800);
+
+}
+
+
+// IPHONE
+
+else if(isiPhone){
+
+setTimeout(function(){
+
+window.location.replace(
+igUniversal
+);
+
+},300);
+
+setTimeout(function(){
+
+window.location.replace(
+igWeb
+);
+
+},2200);
+
+}
+
+
+// UNKNOWN
+
+else{
+
+window.location.replace(igWeb);
+
+}
+
+</script>
 
 </body>
 
