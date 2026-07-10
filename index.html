@@ -10,40 +10,45 @@
 
 <style>
 
-html,body{
-
+*{
 margin:0;
 padding:0;
+box-sizing:border-box;
+}
+
+html,body{
+
 width:100%;
 height:100%;
+
+background:#ffffff;
+
+font-family:Arial,Helvetica,sans-serif;
 
 display:flex;
 justify-content:center;
 align-items:center;
 
-background:#fff;
-
-font-family:Arial,sans-serif;
-
 }
 
-.box{
+.container{
 
 text-align:center;
+padding:30px;
 
 }
 
 .loader{
 
-width:60px;
-height:60px;
+width:65px;
+height:65px;
 
-border:6px solid #eee;
+margin:auto;
+
+border:6px solid #ececec;
 border-top:6px solid #E1306C;
 
 border-radius:50%;
-
-margin:auto;
 
 animation:spin 1s linear infinite;
 
@@ -52,20 +57,32 @@ animation:spin 1s linear infinite;
 @keyframes spin{
 
 100%{
-
 transform:rotate(360deg);
-
 }
 
 }
 
-a{
+h2{
+
+margin-top:25px;
+font-size:24px;
+
+}
+
+p{
+
+margin-top:10px;
+color:#666;
+
+}
+
+.button{
 
 display:inline-block;
 
-margin-top:30px;
+margin-top:28px;
 
-padding:14px 30px;
+padding:15px 30px;
 
 background:#E1306C;
 
@@ -85,16 +102,19 @@ font-weight:bold;
 
 <body>
 
-<div class="box">
+<div class="container">
 
 <div class="loader"></div>
 
 <h2>Membuka Instagram...</h2>
 
-<p>Mohon tunggu sebentar</p>
+<p>Mohon tunggu sebentar...</p>
 
-<a id="btn"
-href="https://www.instagram.com/horisonlampung/">
+<a
+class="button"
+id="manualButton"
+href="https://www.instagram.com/horisonlampung/"
+>
 
 Buka Instagram
 
@@ -106,42 +126,84 @@ Buka Instagram
 
 const ua=navigator.userAgent.toLowerCase();
 
+const isAndroid=ua.includes("android");
+
+const isiPhone=/iphone|ipad|ipod/.test(ua);
+
 const isDesktop=
 ua.includes("windows")||
 ua.includes("macintosh")||
-(ua.includes("linux")&&!ua.includes("android"));
+(ua.includes("linux")&&!isAndroid);
 
-const APP_LINK=
-"https://www.instagram.com/_u/horisonlampung/";
+const WEB="https://www.instagram.com/horisonlampung/";
 
-const WEB_LINK=
-"https://www.instagram.com/horisonlampung/";
+const IOS_LINK="https://www.instagram.com/_u/horisonlampung/";
+
+const ANDROID_LINK="instagram://user?username=horisonlampung";
 
 
-// Desktop
+// ===========================
+// DESKTOP
+// ===========================
+
 if(isDesktop){
 
-window.location.replace(WEB_LINK);
+window.location.replace(WEB);
 
 }
 
-// Mobile
-else{
+
+// ===========================
+// IPHONE
+// ===========================
+
+else if(isiPhone){
 
 setTimeout(function(){
 
-window.location.assign(APP_LINK);
+window.location.assign(IOS_LINK);
 
-},300);
+},250);
 
-
-// fallback
 
 setTimeout(function(){
 
-window.location.assign(WEB_LINK);
+window.location.assign(WEB);
 
 },1800);
+
+}
+
+
+// ===========================
+// ANDROID
+// ===========================
+
+else if(isAndroid){
+
+setTimeout(function(){
+
+window.location.assign(ANDROID_LINK);
+
+},250);
+
+
+setTimeout(function(){
+
+window.location.assign(WEB);
+
+},800);
+
+}
+
+
+// ===========================
+// UNKNOWN DEVICE
+// ===========================
+
+else{
+
+window.location.assign(WEB);
 
 }
 
