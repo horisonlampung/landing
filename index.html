@@ -10,45 +10,40 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 html,body{
 
+margin:0;
+padding:0;
 width:100%;
 height:100%;
-
-background:#ffffff;
-
-font-family:Arial,Helvetica,sans-serif;
 
 display:flex;
 justify-content:center;
 align-items:center;
 
+background:#fff;
+
+font-family:Arial,sans-serif;
+
 }
 
-.container{
+.box{
 
 text-align:center;
-padding:30px;
 
 }
 
 .loader{
 
-width:65px;
-height:65px;
+width:60px;
+height:60px;
 
-margin:auto;
-
-border:6px solid #ececec;
+border:6px solid #eee;
 border-top:6px solid #E1306C;
 
 border-radius:50%;
+
+margin:auto;
 
 animation:spin 1s linear infinite;
 
@@ -57,32 +52,20 @@ animation:spin 1s linear infinite;
 @keyframes spin{
 
 100%{
+
 transform:rotate(360deg);
-}
 
 }
 
-h2{
-
-margin-top:25px;
-font-size:24px;
-
 }
 
-p{
-
-margin-top:10px;
-color:#666;
-
-}
-
-.button{
+a{
 
 display:inline-block;
 
-margin-top:28px;
+margin-top:30px;
 
-padding:15px 30px;
+padding:14px 30px;
 
 background:#E1306C;
 
@@ -102,19 +85,16 @@ font-weight:bold;
 
 <body>
 
-<div class="container">
+<div class="box">
 
 <div class="loader"></div>
 
 <h2>Membuka Instagram...</h2>
 
-<p>Mohon tunggu sebentar...</p>
+<p>Mohon tunggu sebentar</p>
 
-<a
-class="button"
-id="manualButton"
-href="https://www.instagram.com/horisonlampung/"
->
+<a id="btn"
+href="https://www.instagram.com/horisonlampung/">
 
 Buka Instagram
 
@@ -126,84 +106,40 @@ Buka Instagram
 
 const ua=navigator.userAgent.toLowerCase();
 
-const isAndroid=ua.includes("android");
+const isDesktop =
+ua.includes("windows") ||
+ua.includes("macintosh") ||
+(ua.includes("linux") && !ua.includes("android"));
 
-const isiPhone=/iphone|ipad|ipod/.test(ua);
+const APP_LINK =
+"https://www.instagram.com/_u/horisonlampung/";
 
-const isDesktop=
-ua.includes("windows")||
-ua.includes("macintosh")||
-(ua.includes("linux")&&!isAndroid);
+const WEB_LINK =
+"https://www.instagram.com/horisonlampung/";
 
-const WEB="https://www.instagram.com/horisonlampung/";
-
-const IOS_LINK="https://www.instagram.com/_u/horisonlampung/";
-
-const ANDROID_LINK="instagram://user?username=horisonlampung";
-
-
-// ===========================
-// DESKTOP
-// ===========================
-
+// Desktop
 if(isDesktop){
 
-window.location.replace(WEB);
+    window.location.replace(WEB_LINK);
 
 }
 
-
-// ===========================
-// IPHONE
-// ===========================
-
-else if(isiPhone){
-
-setTimeout(function(){
-
-window.location.assign(IOS_LINK);
-
-},250);
-
-
-setTimeout(function(){
-
-window.location.assign(WEB);
-
-},1800);
-
-}
-
-
-// ===========================
-// ANDROID
-// ===========================
-
-else if(isAndroid){
-
-setTimeout(function(){
-
-window.location.assign(ANDROID_LINK);
-
-},250);
-
-
-setTimeout(function(){
-
-window.location.assign(WEB);
-
-},800);
-
-}
-
-
-// ===========================
-// UNKNOWN DEVICE
-// ===========================
-
+// Mobile
 else{
 
-window.location.assign(WEB);
+    // Universal Link
+    setTimeout(function(){
+
+        window.location.assign(APP_LINK);
+
+    },300);
+
+    // Fallback ke Web
+    setTimeout(function(){
+
+        window.location.assign(WEB_LINK);
+
+    },1800);
 
 }
 
